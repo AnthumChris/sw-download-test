@@ -1,0 +1,120 @@
+<head>
+  <title>Service Worker Download Test</title>
+  <link rel="stylesheet" href="lib/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    if (/^sw-download-test.anthum.com$/i.test(window.location.hostname)) {
+      ga('create', 'UA-50610215-4', 'auto');
+      ga('send', 'pageview');
+    }
+  </script>
+</head>
+<body class="container-fluid">
+  <div class="row">
+
+    <div class="col-xs-12">
+      
+      <strong>Service Worker:</strong> <span id="sw-status">&nbsp;</span>
+      (<a href="javascript:swRegister();">enable</a> | <a href="javascript:swUnregister();">disable</a>)
+      <hr />
+    </div>
+
+    <div class="col-xs-12">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Protocol</th>
+            <th>Service Worker</th>
+            <th>Gzip</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rownum"></td>
+            <td>http</td>
+            <td>no</td>
+            <td>no</td>
+            <td class="buttons">
+              <a class="download btn btn-primary btn-xs" rel="http" href="download-no-gzip.php?inline">View</a>
+              <a class="download btn btn-primary btn-xs" rel="http" href="download-no-gzip.php">Download</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="rownum"></td>
+            <td>http</td>
+            <td>no</td>
+            <td>yes</td>
+            <td class="buttons">
+              <a class="download btn btn-primary btn-xs" rel="http" href="download.php?inline">View</a>
+              <a class="download btn btn-primary btn-xs" rel="http" href="download.php">Download</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="rownum"></td>
+            <td>HTTPS</td>
+            <td>no</td>
+            <td>no</td>
+            <td class="buttons">
+              <a class="download btn btn-primary btn-xs" rel="https" href="download-no-gzip.php?inline">View</a>
+              <a class="download btn btn-primary btn-xs" rel="https" href="download-no-gzip.php">Download</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="rownum"></td>
+            <td>HTTPS</td>
+            <td>no</td>
+            <td>yes</td>
+            <td class="buttons">
+              <a class="download btn btn-primary btn-xs" rel="https" href="download.php?inline">View</a>
+              <a class="download btn btn-primary btn-xs" rel="https" href="download.php">Download</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="rownum"></td>
+            <td>HTTPS</td>
+            <td>yes <span class="sw-disabled">(disabled)</span></td>
+            <td>no</td>
+            <td class="buttons">
+              <a class="download btn btn-primary btn-xs" rel="https" href="service-worker-scope/download-no-gzip.php?inline">View</a>
+              <a class="download btn btn-primary btn-xs" rel="https" href="service-worker-scope/download-no-gzip.php">Download</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="rownum"></td>
+            <td>HTTPS</td>
+            <td>yes <span class="sw-disabled">(disabled)</span></td>
+            <td>yes</td>
+            <td class="buttons">
+              <a class="download btn btn-primary btn-xs" rel="https" href="service-worker-scope/download.php?inline">View</a>
+              <a class="download btn btn-primary btn-xs" rel="https" href="service-worker-scope/download.php">Download (problematic in Firefox)</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr />
+
+  <p>This page exemplifies an error when downloading #6 in Firefox 47.0.  The combination of 
+  of HTTPS, Gzip, and Service Worker do not allow the file to download successfully.  Firefox shows a pop-up with error
+  "[filename] could not be saved, because the source file could not be read."
+  <p>
+    Gzip compression is enabled by Nginx, and PHP is used to stream a text file.  This download problem also occurred
+    using a Python back-end to dynamically stream a file, but this server does not provide Python support.
+  </p>
+  <p>
+    <a href="https://github.com/AnthumChris/sw-download-test">View on GitHub</a>
+  </p>
+
+  <script src="lib/jquery-3.1.0.min.js"></script>
+  <script src="init.js"></script>
+</body>

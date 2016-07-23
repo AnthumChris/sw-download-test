@@ -1,0 +1,60 @@
+.btn-block {
+  margin-top: 2rem !important;
+  max-width: 150px;
+}
+.row {
+  margin-top: 1em;
+}
+p {
+  max-width: 600px;
+}
+h3 {
+  font-size: 20px;
+  margin: 1em 0 .5em 0;
+}
+table {
+  font-size: 12px;
+}
+th {
+  background: #eee;
+}
+th, td {
+  padding: .5em .5em;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+td.buttons {
+  padding-top: 0;
+  text-align: left;
+}
+td.buttons .btn {
+  margin-top: .5em;
+}
+.rownum {
+  color: #999;
+}
+table {
+  counter-reset: row;
+}
+table tbody tr {
+  counter-increment: row;
+}
+table tbody tr .rownum::before {
+  content: counter(row);
+}
+.on, .off {
+  font-weight: bold;
+  display: inline-block;
+  min-width: 100px;
+}
+.on {
+  color: #00d500;
+}
+.off {
+  color: #f00;
+}
+.sw-disabled {
+  display: none;
+  color: #f00;
+}
