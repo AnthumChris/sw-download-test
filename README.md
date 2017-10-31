@@ -1,6 +1,6 @@
 https://sw-download-test.anthum.com/
 
-This website exemplifies a file download error in Firefox when using Service Worker and gzip.  Originally intended for the Firefox team to test and evaluate validity of possible bug.
+This website above exemplifies a file download error in Firefox when using Service Worker and gzip.  Originally created for the Firefox team to test and evaluate validity of now resolved [Firefox Bug #1288915](https://bugzilla.mozilla.org/show_bug.cgi?id=1288915)
 
 # Deployment Server Configuration
 Deployment server uses Nginx and PHP-FPM serving HTTPS over HTTP/1, not HTTP/2
